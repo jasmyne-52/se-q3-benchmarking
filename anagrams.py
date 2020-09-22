@@ -10,9 +10,10 @@ for an arbitrary list of strings.
 
 # Your name here, and any other people/sources who helped.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Jasmyne Ford"
 
 import sys
+# import cProfile
 
 
 def alphabetize(string):
@@ -21,18 +22,26 @@ def alphabetize(string):
 
 
 def find_anagrams(words):
+    anagram_dict = {}
+    for word in words:
+        compareValue = alphabetize(word)
+        if compareValue not in anagram_dict:
+            anagram_dict[compareValue] = [word]
+        else:
+            anagram_dict[compareValue] += [word]
     """
     Returns a dictionary with keys that are alphabetized words and values
     that are all words that, when alphabetized, match the key.
     Example:
     {'dgo': ['dog'], 'act': ['cat', 'act']}
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
-    return anagrams
+    # anagrams = {
+    #     alphabetize(word): [
+    #         w for w in words
+    #         if alphabetize(w) == alphabetize(word)]
+    #     for word in words}
+    return anagram_dict
+    # return anagrams
 
 
 def main(args):
@@ -50,3 +59,4 @@ def main(args):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+    # cProfile.run("main(sys.argv[1:])")
